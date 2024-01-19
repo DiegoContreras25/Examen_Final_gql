@@ -1,4 +1,4 @@
-export type algo = {
-  name: string;
-  algo: algo[];
+export type contact = {
+  nombre: string;
+  telefono: string;
 };

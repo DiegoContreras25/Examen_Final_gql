@@ -6,7 +6,8 @@ import { typeDefs } from "./gql/schema.ts";
 import mongoose from "mongoose";
 
 import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts";
-
+//https://cool-clam-56-xkanm99c0c5d.deno.dev/
+//http://localhost:4000/
 const env = await load();
 const mongo_usr: string | undefined = env.MONGO_USR ||
   Deno.env.get("MONGO_USR");

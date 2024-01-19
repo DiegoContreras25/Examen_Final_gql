@@ -1,17 +1,21 @@
 // The GraphQL schema
 export const typeDefs = `#graphql
 
-  type algo {
-   name: String!
-   algo: [algo!]
+  type contact {
+   nombre: String!
+   telefono: String!
+   
   }
 
   type Query {
-    algo: [algo!]!
+    getContacts: [contact!]!
+    getContact(id: ID!): contact!
+    
   }
   type Mutation {
-    addalgo(name: String!): algo!
-    deletealgo(id: ID!): algo!
+    addContact(nombre: String!, telefono: String!): contact!
+    deleteContact(id: ID!): contact!
+    updateContact(id: ID!, nombre: String!, telefono: String!): contact!
     
   }
 `;

@@ -1,27 +1,40 @@
 import { GraphQLError } from "graphql";
-import { algoModel, algoModelType } from "../db/algo.ts";
+import { contactModel, contactModelType } from "../db/contact.ts";
 
 export const Mutation = {
-  addalgo: async (
+  addContact: async (
     _: unknown,
-    args: { name: string },
-  ): Promise<algoModelType> => {
-    const algo = {
-      name: args.name,
+    args: { nombre: string; telefono: string },
+  ): Promise<contactModelType> => {
+    const contact = {
+      nombre: args.nombre,
+      telefono: args.telefono,
     };
-    const newalgo = await algoModel.create(algo);
-    return newalgo;
+    const newContact = await contactModel.create(contact);
+    return newContact;
   },
-  deletealgo: async (
+  deleteContact: async (
     _: unknown,
     args: { id: string },
-  ): Promise<algoModelType> => {
-    const algo = await algoModel.findByIdAndDelete(args.id);
-    if (!algo) {
-      throw new GraphQLError(`No algo found with id ${args.id}`, {
+  ): Promise<contactModelType> => {
+    const contact = await contactModel.findByIdAndDelete(args.id);
+    if (!contact) {
+      throw new GraphQLError(`No contact found with id ${args.id}`, {
         extensions: { code: "NOT_FOUND" },
       });
     }
-    return algo;
+    return contact;
+  },
+  updateContact: async (
+    _: unknown,
+    args: { id: string; nombre: string; telefono: string },
+  ): Promise<contactModelType> => {
+    const contact = await contactModel.findByIdAndUpdate(args);
+    if (!contact) {
+      throw new GraphQLError(`No contact found with id ${args}`, {
+        extensions: { code: "NOT_FOUND" },
+      });
+    }
+    return contact;
   },
 };
